@@ -12,7 +12,33 @@ class MenuScreen extends StatelessWidget {
       backgroundColor: apptheme.primaryColor,
       appBar: CustomAppBar(),
       drawer: CustomDrawer(),
-      body: Container(),
+      body: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            flex: 4,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Restaurant Menu", style: apptheme.HomescreenHeading,),
+                    SizedBox(height: 20,)
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: Container(
+              margin: EdgeInsets.only(top: 20, bottom: 20, right: 20),
+              color: apptheme.secondaryColor,
+              child: Center(child: Text("Show some ads here")),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
