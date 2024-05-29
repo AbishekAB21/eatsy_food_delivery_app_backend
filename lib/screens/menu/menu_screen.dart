@@ -1,6 +1,7 @@
 import 'package:eatsy_food_delivery_app_backend/utils/apptheme.dart';
 import 'package:eatsy_food_delivery_app_backend/widgets/custom_app_bar.dart';
 import 'package:eatsy_food_delivery_app_backend/widgets/custom_drawer.dart';
+import 'package:eatsy_food_delivery_app_backend/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 
 class MenuScreen extends StatelessWidget {
@@ -23,8 +24,23 @@ class MenuScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Restaurant Menu", style: apptheme.HomescreenHeading,),
-                    SizedBox(height: 20,)
+                    Text(
+                      "Restaurant Menu",
+                      style: apptheme.HomescreenHeading,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      height: 200,
+                      child: ListView.builder(
+                        itemCount: 10,
+                        itemBuilder: (context, index) {
+                          
+                          return ProductCard();
+                        },),
+                    )
                   ],
                 ),
               ),
@@ -42,5 +58,3 @@ class MenuScreen extends StatelessWidget {
     );
   }
 }
-
-

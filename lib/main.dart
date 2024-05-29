@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Eatsy Food Delivery App Backend",
       initialRoute: '/menu',
+      debugShowCheckedModeBanner: false,
       routes: {
         '/menu' :(context) => MenuScreen(),
         // '/dash' :(context) => DashboardScreen(),
