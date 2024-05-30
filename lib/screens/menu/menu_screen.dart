@@ -1,3 +1,4 @@
+import 'package:eatsy_food_delivery_app_backend/models/product_model.dart';
 import 'package:eatsy_food_delivery_app_backend/utils/apptheme.dart';
 import 'package:eatsy_food_delivery_app_backend/widgets/custom_app_bar.dart';
 import 'package:eatsy_food_delivery_app_backend/widgets/custom_drawer.dart';
@@ -38,7 +39,7 @@ class MenuScreen extends StatelessWidget {
                         itemCount: 10,
                         itemBuilder: (context, index) {
                           
-                          return ProductCard();
+                          return ProductCard(product: Product.products[index], index: index,);
                         },),
                     )
                   ],

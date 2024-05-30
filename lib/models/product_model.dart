@@ -58,11 +58,41 @@ class Product extends Equatable {
       id: '1',
       name: 'Margherita',
       category: 'Pizza',
-      description: 'Tomatoes, Mozzerella and Cheese',
+      description: 'Tomatoes, Onions and Mozzerella Cheese',
       imageUrl:
           "https://images.unsplash.com/photo-1598023696416-0193a0bcd302?q=80&w=2736&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       price: 120,
       index: 0,
+    ),
+    Product(
+      id: '2',
+      name: ' Chicken Cheese Maxx',
+      category: 'Pizza',
+      description: 'Chicken, Onions and Mozzerella Cheese',
+      imageUrl:
+          "https://images.unsplash.com/photo-1598023696416-0193a0bcd302?q=80&w=2736&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      price: 320,
+      index: 1,
+    ),
+    Product(
+      id: '3',
+      name: 'Paneer Delight',
+      category: 'Pizza',
+      description: 'Tomatoes, Paneer and Cheese',
+      imageUrl:
+          "https://images.unsplash.com/photo-1598023696416-0193a0bcd302?q=80&w=2736&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      price: 180,
+      index: 2,
+    ),
+    Product(
+      id: '4',
+      name: 'Pepperoni',
+      category: 'Pizza',
+      description: 'Pepperonni, Onions and Mozzerella Cheese',
+      imageUrl:
+          "https://images.unsplash.com/photo-1598023696416-0193a0bcd302?q=80&w=2736&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      price: 310,
+      index: 3,
     )
   ];
 }
