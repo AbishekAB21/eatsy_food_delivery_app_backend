@@ -9,6 +9,7 @@ abstract class AppTheme {
   final Color SnackBarColor;
   final Color ErrorColor;
   final Color ShadowColor;
+  final Color ContainerColor;
   final TextStyle SplashText;
   final TextStyle LoginWelcome;
   final TextStyle LoginText1;
@@ -30,35 +31,45 @@ abstract class AppTheme {
   final TextStyle ProfileScreenTexts;
   final TextStyle RestaurantInfoScreenTitle;
   final TextStyle RestaurantTags;
+  final TextStyle headline5;
+  final TextStyle healdline4;
+  final TextStyle bodyText1;
+  final TextStyle headline3Black;
 
-  AppTheme(
-      {required this.primaryColor,
-      required this.primaryColor2,
-      required this.secondaryColor,
-      required this.SplashText,
-      required this.LoginWelcome,
-      required this.LoginText1,
-      required this.CreateAccountText,
-      required this.LoginHintText,
-      required this.ButtonText,
-      required this.ButtonText2,
-      required this.ForgotPasswordText,
-      required this.SnackBarColor,
-      required this.ErrorColor,
-      required this.ShadowColor,
-      required this.ErrorMessage,
-      required this.HomeScreenAppBar,
-      required this.UserName,
-      required this.CategoryTile,
-      required this.PromoBoxText1,
-      required this.PromoBoxText2,
-      required this.HomeScreenSearchHint,
-      required this.HomescreenHeading,
-      required this.DeliveryTime,
-      required this.restaurantName,
-      required this.ProfileScreenTexts,
-      required this.RestaurantInfoScreenTitle,
-      required this.RestaurantTags});
+  AppTheme({
+    required this.primaryColor,
+    required this.primaryColor2,
+    required this.secondaryColor,
+    required this.SplashText,
+    required this.LoginWelcome,
+    required this.LoginText1,
+    required this.CreateAccountText,
+    required this.LoginHintText,
+    required this.ButtonText,
+    required this.ButtonText2,
+    required this.ForgotPasswordText,
+    required this.SnackBarColor,
+    required this.ErrorColor,
+    required this.ShadowColor,
+    required this.ErrorMessage,
+    required this.HomeScreenAppBar,
+    required this.UserName,
+    required this.CategoryTile,
+    required this.PromoBoxText1,
+    required this.PromoBoxText2,
+    required this.HomeScreenSearchHint,
+    required this.HomescreenHeading,
+    required this.DeliveryTime,
+    required this.restaurantName,
+    required this.ProfileScreenTexts,
+    required this.RestaurantInfoScreenTitle,
+    required this.RestaurantTags,
+    required this.ContainerColor,
+    required this.headline5,
+    required this.healdline4,
+    required this.bodyText1,
+    required this.headline3Black,
+  });
 }
 
 class AppDefaultTheme extends AppTheme {
@@ -128,5 +139,17 @@ class AppDefaultTheme extends AppTheme {
             RestaurantTags: TextStyle(
                 fontSize: 16,
                 color: Color.fromARGB(255, 236, 110, 101),
-                fontWeight: FontWeight.w900));
+                fontWeight: FontWeight.w900),
+            ContainerColor: Colors.grey.shade300,
+            headline5: TextStyle(
+                fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold),
+            healdline4: TextStyle(
+                fontSize: 18,
+                color: Color.fromARGB(255, 236, 110, 101),
+                fontWeight: FontWeight.bold),
+            bodyText1: TextStyle(fontSize: 14, color: Colors.black),
+            headline3Black: TextStyle(
+                fontSize: 16,
+                color: Colors.black, fontWeight: FontWeight.bold
+            ),);
 }
