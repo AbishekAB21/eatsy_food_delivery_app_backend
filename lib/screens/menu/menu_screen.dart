@@ -52,39 +52,50 @@ class MenuScreen extends StatelessWidget {
                     SizedBox(
                       height: 20,
                     ),
-                    Container(
-                      constraints: BoxConstraints(
-                        minHeight: 300,
-                        maxHeight: 1000,
-                      ),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: _buildCategoryTile(),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Expanded(
-                            child: _buildProductTile(),
+                    Responsive.isWideDesktop(context) ||
+                            Responsive.isDesktop(context)
+                        ? Container(
+                            constraints: BoxConstraints(
+                              minHeight: 300,
+                              maxHeight: 1000,
+                            ),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: _buildCategoryTile(),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Expanded(
+                                  child: _buildProductTile(),
+                                )
+                              ],
+                            ),
                           )
-                        ],
-                      ),
-                    )
+                        : Column(
+                          children: [
+                            _buildCategoryTile(),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            _buildProductTile()
+                          ],
+                        )
                   ],
                 ),
               ),
             ),
           ),
-
-          Responsive.isWideDesktop(context) || Responsive.isDesktop(context) ? 
-          Expanded(
-            child: Container(
-              margin: EdgeInsets.only(top: 20, bottom: 20, right: 20),
-              color: apptheme.secondaryColor,
-              child: Center(child: Text("Show some ads here")),
-            ),
-          ) : const SizedBox()
+          Responsive.isWideDesktop(context) || Responsive.isDesktop(context)
+              ? Expanded(
+                  child: Container(
+                    margin: EdgeInsets.only(top: 20, bottom: 20, right: 20),
+                    color: apptheme.secondaryColor,
+                    child: Center(child: Text("Show some ads here")),
+                  ),
+                )
+              : const SizedBox()
         ],
       ),
     );
