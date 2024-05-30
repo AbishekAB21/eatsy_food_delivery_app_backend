@@ -66,7 +66,7 @@ class Product extends Equatable {
     ),
     Product(
       id: '2',
-      name: ' Chicken Supreme',
+      name: 'Chicken Supreme',
       category: 'Pizza',
       description: 'Chicken, Onions and Mozzerella Cheese',
       imageUrl:
@@ -96,9 +96,9 @@ class Product extends Equatable {
     ),
     Product(
       id: '5',
-      name: 'Pepperoni',
+      name: 'Chicago Pizza',
       category: 'Pizza',
-      description: 'Pepperonni, Onions and Mozzerella Cheese',
+      description: 'Cheese, Meat and Veggies',
       imageUrl:
           "https://images.unsplash.com/photo-1598023696416-0193a0bcd302?q=80&w=2736&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       price: 310,

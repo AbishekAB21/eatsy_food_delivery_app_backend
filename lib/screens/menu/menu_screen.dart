@@ -1,11 +1,13 @@
+import 'package:eatsy_food_delivery_app_backend/config/responsive.dart';
 import 'package:eatsy_food_delivery_app_backend/models/category_model.dart';
 import 'package:eatsy_food_delivery_app_backend/models/product_model.dart';
 import 'package:eatsy_food_delivery_app_backend/utils/apptheme.dart';
+import 'package:eatsy_food_delivery_app_backend/widgets/category_list_tile.dart';
 import 'package:eatsy_food_delivery_app_backend/widgets/custom_app_bar.dart';
 import 'package:eatsy_food_delivery_app_backend/widgets/custom_drawer.dart';
 import 'package:eatsy_food_delivery_app_backend/widgets/product_card.dart';
+import 'package:eatsy_food_delivery_app_backend/widgets/product_list_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class MenuScreen extends StatelessWidget {
   const MenuScreen({super.key});
@@ -58,31 +60,13 @@ class MenuScreen extends StatelessWidget {
                       child: Row(
                         children: [
                           Expanded(
-                            child: Container(
-                              padding: EdgeInsets.all(20),
-                              color: apptheme.ContainerColor,
-                              child: Column(
-                                children: [
-                                  Text("Categories", style: apptheme.headline3Black,),
-                                  SizedBox(height: 20,),
-                                  ...Category.categories.map((category) {
-                                    return ListTile(
-                                      leading: Image.asset(category.imageUrl, height: 25,),
-                                      title: Text(category.name, style: apptheme.headline5,),
-                                      subtitle: Text(category.description, style: apptheme.bodyText1,),
-                                      trailing: Icon(Icons.menu_rounded, color: apptheme.primaryColor2,),
-                                    );
-                                  }).toList(),
-                                ],
-                              ),
-                            ),
+                            child: _buildCategoryTile(),
                           ),
-                          SizedBox(width: 10,),
-                           Expanded(
-                            child: Container(
-                              padding: EdgeInsets.all(20),
-                              color: apptheme.ContainerColor,
-                            ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: _buildProductTile(),
                           )
                         ],
                       ),
@@ -92,13 +76,61 @@ class MenuScreen extends StatelessWidget {
               ),
             ),
           ),
+
+          Responsive.isWideDesktop(context) || Responsive.isDesktop(context) ? 
           Expanded(
             child: Container(
               margin: EdgeInsets.only(top: 20, bottom: 20, right: 20),
               color: apptheme.secondaryColor,
               child: Center(child: Text("Show some ads here")),
             ),
-          )
+          ) : const SizedBox()
+        ],
+      ),
+    );
+  }
+
+  Container _buildProductTile() {
+    return Container(
+      padding: EdgeInsets.all(20),
+      color: apptheme.ContainerColor,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Products",
+            style: apptheme.headline3Black,
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          ...Product.products.map((products) {
+            return ProductListTile(
+              product: products,
+            );
+          }).toList(),
+        ],
+      ),
+    );
+  }
+
+  Container _buildCategoryTile() {
+    return Container(
+      padding: EdgeInsets.all(20),
+      color: apptheme.ContainerColor,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Categories",
+            style: apptheme.headline3Black,
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          ...Category.categories.map((category) {
+            return CategoryListTile(category: category);
+          }).toList(),
         ],
       ),
     );
