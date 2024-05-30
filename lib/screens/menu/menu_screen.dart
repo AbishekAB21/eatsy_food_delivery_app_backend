@@ -81,6 +81,15 @@ class MenuScreen extends StatelessWidget {
                             ),
                             _buildProductTile()
                           ],
+                        ),
+                        SizedBox(height: 20,),
+                        Container(
+                          width: double.infinity,
+                          constraints: BoxConstraints(minHeight: 74),
+                          color: apptheme.primaryColor2,
+                          child: Center(
+                            child: Text("Some ads here"),
+                          ),
                         )
                   ],
                 ),

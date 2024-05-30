@@ -17,9 +17,9 @@ class CustomDrawer extends StatelessWidget {
         'routename': '/menu',
         'icon': const Icon(Icons.menu_book_rounded),
       },
-      'Opening Hours': {
-        'routename': '/opening-hours',
-        'icon': const Icon(Icons.lock_clock_rounded),
+      'Settings': {
+        'routename': '/settings',
+        'icon': const Icon(Icons.settings_rounded),
       },
       'Logout': {
         'routename': '/logout',

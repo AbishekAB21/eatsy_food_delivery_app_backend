@@ -1,4 +1,5 @@
 import 'package:eatsy_food_delivery_app_backend/screens/menu/menu_screen.dart';
+import 'package:eatsy_food_delivery_app_backend/screens/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/menu' :(context) => MenuScreen(),
         // '/dash' :(context) => DashboardScreen(),
-        // '/opening-hours' :(context) => OpeningHoursScreen(),
+         '/settings' :(context) => SettingsScreen(),
       },
     );
   }
