@@ -1,5 +1,6 @@
 import 'package:eatsy_food_delivery_app_backend/widgets/custom_app_bar.dart';
 import 'package:eatsy_food_delivery_app_backend/widgets/custom_drawer.dart';
+import 'package:eatsy_food_delivery_app_backend/widgets/custom_layout.dart';
 import 'package:flutter/material.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -10,7 +11,7 @@ class SettingsScreen extends StatelessWidget {
     return Scaffold(
       appBar: const CustomAppBar(),
       drawer: const CustomDrawer(),
-      body: Container(),
+      body: CustomLayout(title: "Settings",widgets: [],),
     );
   }
 }
