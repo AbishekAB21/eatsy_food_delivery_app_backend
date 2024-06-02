@@ -7,4 +7,13 @@ sealed class SettingsState extends Equatable {
   List<Object> get props => [];
 }
 
-final class SettingsInitial extends SettingsState {}
+final class SettingsLoading extends SettingsState {}
+
+class SettingsLoaded extends SettingsState{
+  final Restaurant restaurant;
+
+  SettingsLoaded(this.restaurant);
+
+  @override
+  List<Object> get props => [restaurant];
+}
