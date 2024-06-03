@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "584920959416",
+    "project_id": "eatsy-food-delivery-app-7ca89",
+    "storage_bucket": "eatsy-food-delivery-app-7ca89.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:584920959416:android:6d3607cc2b9feb37c3e74d",
+        "android_client_info": {
+          "package_name": "com.example.eatsy_food_delivery_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "584920959416-lt2utrbga8fpck34p4eki266m2bb477f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.eatsy_food_delivery_app",
+            "certificate_hash": "171dc720049929933c459398a5c0a60e4f765147"
+          }
+        },
+        {
+          "client_id": "584920959416-2p0egqjj7mjtdiph4voreq1pfpetp8ec.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFumHo3NXXT6j5jSRIbxblCbOhBSIMzOE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "584920959416-2p0egqjj7mjtdiph4voreq1pfpetp8ec.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "584920959416-8scd8c82icehjehml2n8lguf5efq63si.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.eatsyFoodDeliveryApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:584920959416:android:5c9a07ef795fd545c3e74d",
+        "android_client_info": {
+          "package_name": "com.example.eatsy_food_delivery_app_backend"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "584920959416-2p0egqjj7mjtdiph4voreq1pfpetp8ec.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFumHo3NXXT6j5jSRIbxblCbOhBSIMzOE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "584920959416-2p0egqjj7mjtdiph4voreq1pfpetp8ec.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "584920959416-8scd8c82icehjehml2n8lguf5efq63si.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.eatsyFoodDeliveryApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

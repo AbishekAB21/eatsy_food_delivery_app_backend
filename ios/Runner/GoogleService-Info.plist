@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>584920959416-q9lhe01rs9g7ac77r74h7tqu86pms2cs.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.584920959416-q9lhe01rs9g7ac77r74h7tqu86pms2cs</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>584920959416-lt2utrbga8fpck34p4eki266m2bb477f.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA8Kq4N1mIIX9z0SyA_WIwoPeSPsys-0DQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>584920959416</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.eatsyFoodDeliveryAppBackend</string>
+	<key>PROJECT_ID</key>
+	<string>eatsy-food-delivery-app-7ca89</string>
+	<key>STORAGE_BUCKET</key>
+	<string>eatsy-food-delivery-app-7ca89.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:584920959416:ios:fdef1eed67d1fdd2c3e74d</string>
+</dict>
+</plist>
