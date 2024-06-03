@@ -5,6 +5,7 @@ import 'package:eatsy_food_delivery_app_backend/widgets/custom_app_bar.dart';
 import 'package:eatsy_food_delivery_app_backend/widgets/custom_drawer.dart';
 import 'package:eatsy_food_delivery_app_backend/widgets/custom_layout.dart';
 import 'package:eatsy_food_delivery_app_backend/widgets/custom_text_form_field.dart';
+import 'package:eatsy_food_delivery_app_backend/widgets/opening_hours_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -47,13 +48,39 @@ class SettingsScreen extends StatelessWidget {
                     _buildRestaurantDescription(),
                   ],
                 ),
-          
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20.0),
-            child: Text("Opening Hours", style: apptheme.healdline4,),
-          )
+            child: Text(
+              "Opening Hours",
+              style: apptheme.healdline4,
+            ),
+          ),
+          _buildOpeningHours()
         ],
       ),
+    );
+  }
+
+  BlocBuilder<SettingsBloc, SettingsState> _buildOpeningHours() {
+    return BlocBuilder<SettingsBloc, SettingsState>(
+      builder: (context, state) {
+        if (state is SettingsLoading) {
+          return Center(
+            child: CircularProgressIndicator(
+              color: apptheme.primaryColor2,
+            ),
+          );
+        }
+        if (state is SettingsLoaded) {
+          return ListView.builder(
+            shrinkWrap: true,
+            itemCount: state.restaurant.openingHours!.length,
+            itemBuilder: (context, index) => OpeningHoursWidget(),
+          );
+        } else {
+          return Text('Something went wrong');
+        }
+      },
     );
   }
 
@@ -196,3 +223,5 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 }
+
+
