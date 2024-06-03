@@ -15,7 +15,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 
   void _onLoadSettings(
     LoadSettings event,
-    Emitter<SettingsState> emit, 
+    Emitter<SettingsState> emit,
     // An Emitter is a class which is capable of emitting new states
   ) async {
     await Future<void>.delayed(Duration(seconds: 1));
@@ -31,11 +31,27 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     UpdateSettings event,
     Emitter<SettingsState> emit,
     // An Emitter is a class which is capable of emitting new states
-  ) {}
+  ) {
+    emit(SettingsLoaded(event.restaurant));
+  }
 
   void _onUpdateOpeningHours(
     UpdateOpeningHours event,
     Emitter<SettingsState> emit,
     // An Emitter is a class which is capable of emitting new states
-  ) {}
+  ) {
+    final state = this.state;
+
+    if (state is SettingsLoaded) {
+      List<OpeningHours> OpeningHoursList =
+          (state.restaurant.openingHours!.map((openinghours) {
+        return openinghours.id == event.openinghours.id
+            ? event.openinghours
+            : openinghours;
+      })).toList();
+
+      emit(SettingsLoaded(
+          state.restaurant.copyWith(openingHours: OpeningHoursList)));
+    }
+  }
 }

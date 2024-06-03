@@ -48,7 +48,7 @@ class Restaurant extends Equatable {
         products ?? this.products,
         openingHours ?? this.openingHours);
   }
-
+ 
   static List<Restaurant> restaurants = [
     Restaurant(
         '1',
