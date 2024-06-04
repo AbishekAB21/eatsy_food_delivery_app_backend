@@ -75,7 +75,23 @@ class SettingsScreen extends StatelessWidget {
           return ListView.builder(
             shrinkWrap: true,
             itemCount: state.restaurant.openingHours!.length,
-            itemBuilder: (context, index) => OpeningHoursWidget(),
+            itemBuilder: (context, index) {
+              var openinghours = state.restaurant.openingHours![index];
+
+              return OpeningHoursWidget(
+                openinghours: openinghours,
+                onSliderChange: (value) {
+                  context.read<SettingsBloc>().add(UpdateOpeningHours(
+                      openinghours.copyWith(
+                          openAt: value.start, closeAt: value.end)));
+                },
+                oncheckboxChanged: (value) {
+                  context.read<SettingsBloc>().add(UpdateOpeningHours(
+                      openinghours.copyWith(isOpen: !openinghours.isOpen)));
+                  // Will return the opposite
+                },
+              );
+            },
           );
         } else {
           return Text('Something went wrong');
@@ -223,5 +239,3 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 }
-
-

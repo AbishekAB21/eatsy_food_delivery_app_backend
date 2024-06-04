@@ -95,9 +95,23 @@ class MenuScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "Categories",
-            style: apptheme.headline3Black,
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Categories",
+                  style: apptheme.headline3Black,
+                ),
+                IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.add_circle_rounded,
+                      color: apptheme.primaryColor2,
+                    ))
+              ],
+            ),
           ),
           SizedBox(height: 20),
           ...Category.categories.map((category) {
