@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (context) => SettingsBloc()
               ..add(LoadSettings(Restaurant(
-                '1',
+                null,
                 null,
                 null,
                 null,
