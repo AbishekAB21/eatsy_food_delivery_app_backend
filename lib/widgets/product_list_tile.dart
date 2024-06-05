@@ -4,16 +4,18 @@ import 'package:flutter/material.dart';
 
 class ProductListTile extends StatelessWidget {
   const ProductListTile({
-    super.key, required this.product
+    super.key, required this.product, required this.onTap,
   });
   final Product product;
+  final Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: onTap,
       leading: CircleAvatar(backgroundImage: NetworkImage(product.imageUrl),),
       title: Text(product.name, style: apptheme.headline5,),
       subtitle: Text(product.description, style: apptheme.bodyText1,),
-      trailing: Icon(Icons.menu_rounded, color: apptheme.primaryColor2,),
+      // trailing: Icon(Icons.menu_rounded, color: apptheme.primaryColor2,),
     );
   }
 }

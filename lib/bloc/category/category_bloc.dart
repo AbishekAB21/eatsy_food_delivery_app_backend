@@ -46,5 +46,10 @@ the list
     } catch (_) {}
   }
 
-  void _onSelectCategory(SelectCategory event, Emitter<CategoryState> emit) {}
+  void _onSelectCategory(SelectCategory event, Emitter<CategoryState> emit) {
+    final state = this.state as CategoryLoaded;
+
+    emit(CategoryLoaded(
+        categories: state.categories, selectedCategory: event.category));
+  }
 }

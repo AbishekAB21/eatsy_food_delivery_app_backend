@@ -1,6 +1,6 @@
 import 'package:eatsy_food_delivery_app_backend/bloc/category/category_bloc.dart';
+import 'package:eatsy_food_delivery_app_backend/bloc/product/product_bloc.dart';
 import 'package:eatsy_food_delivery_app_backend/config/responsive.dart';
-import 'package:eatsy_food_delivery_app_backend/models/category_model.dart';
 import 'package:eatsy_food_delivery_app_backend/models/product_model.dart';
 import 'package:eatsy_food_delivery_app_backend/utils/apptheme.dart';
 import 'package:eatsy_food_delivery_app_backend/widgets/category_list_tile.dart';
@@ -80,11 +80,42 @@ class MenuScreen extends StatelessWidget {
             style: apptheme.headline3Black,
           ),
           SizedBox(height: 20),
-          ...Product.products.map((products) {
-            return ProductListTile(
-              product: products,
-            );
-          }).toList(),
+          BlocBuilder<ProductBloc, ProductState>(
+            builder: (context, state) {
+              if (state is ProductLoading) {
+                return CircularProgressIndicator(
+                  color: apptheme.primaryColor2,
+                );
+              }
+
+              if (state is ProductLoaded) {
+                return ReorderableListView(
+                    shrinkWrap: true,
+                    children: [
+                      for (int index = 0;
+                          index < state.products.length;
+                          index++,)
+                        ProductListTile(
+                          product: state.products[index],
+                          onTap: () {},
+                          key: ValueKey(state.products[index].id),
+                        ),
+                    ],
+                    onReorder: ((oldIndex, newIndex) {
+                      context.read<ProductBloc>().add(
+                          SortProducts(oldIndex: oldIndex, newIndex: newIndex));
+                    }));
+                // );
+              } else {
+                return Text("Something went wrong");
+              }
+            },
+          ),
+          // ...Product.products.map((products) {
+          //   return ProductListTile(
+          //     product: products,
+          //   );
+          // }).toList(),
         ],
       ),
     );
@@ -114,7 +145,11 @@ class MenuScreen extends StatelessWidget {
                           index++,)
                         CategoryListTile(
                           category: state.categories[index],
-                          onTap: () {},
+                          onTap: () {
+                            context
+                                .read<CategoryBloc>()
+                                .add(SelectCategory(state.categories[index]));
+                          },
                           key: ValueKey(state.categories[index].id),
                         ),
                     ],
@@ -122,37 +157,6 @@ class MenuScreen extends StatelessWidget {
                       context.read<CategoryBloc>().add(
                           Sortcategory(oldIndex: oldIndex, newIndex: newIndex));
                     }));
-
-                // Container(
-                //   padding: EdgeInsets.all(20),
-                //   color: apptheme.ContainerColor,
-                //   child: Column(
-                //     crossAxisAlignment: CrossAxisAlignment.start,
-                //     children: [
-                //       Padding(
-                //         padding: const EdgeInsets.all(20.0),
-                //         child: Row(
-                //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //           children: [
-                //             Text(
-                //               "Categories",
-                //               style: apptheme.headline3Black,
-                //             ),
-                //             IconButton(
-                //                 onPressed: () {},
-                //                 icon: Icon(
-                //                   Icons.add_circle_rounded,
-                //                   color: apptheme.primaryColor2,
-                //                 ))
-                //           ],
-                //         ),
-                //       ),
-                //       SizedBox(height: 20),
-                //       ...Category.categories.map((category) {
-                //         return CategoryListTile(category: category);
-                //       }).toList(),
-                //     ],
-                //   ),
                 // );
               } else {
                 return Text("Something went wrong");
