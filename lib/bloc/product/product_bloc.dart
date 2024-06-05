@@ -32,7 +32,7 @@ can be sorted as per that category.
 */
 _categorySubscription = _categoryBloc.stream.listen((state) {
   if(state is CategoryLoaded && state.selectedCategory != null){
-    UpdateProducts(category: state.selectedCategory!);
+   add (UpdateProducts(category: state.selectedCategory!));
   }
 });
   }
@@ -58,5 +58,38 @@ the new list of products to be displayed.
     emit(ProductLoaded(products: filterProducts));
   }
 
-  void _onSortProducts(SortProducts event, Emitter<ProductState> emit) {}
+  void _onSortProducts(SortProducts event, Emitter<ProductState> emit) async{
+
+    final state = this.state as ProductLoaded;
+    emit(ProductLoading());
+    await Future.delayed(Duration(seconds: 1));
+
+    int newIndex =
+        (event.newIndex > event.oldIndex) ? event.newIndex - 1 : event.newIndex;
+
+    try {
+      Product selectedProduct = state.products[event.oldIndex];
+
+/* 
+
+Here we take a selected category and remove it from the list and 
+insert it back into the list but into a new position/index thus shuffling 
+the list
+
+*/
+      List<Product> sortProducts = List.from(state.products)
+        ..remove(selectedProduct)
+        ..insert(newIndex, selectedProduct);
+
+      // emits new Category Loaded with updated/shuffled categories
+      emit(ProductLoaded(products: sortProducts));
+    } catch (_) {}
+  }
+
+  void _onSelectCategory(SelectCategory event, Emitter<CategoryState> emit) {
+    final state = this.state as CategoryLoaded;
+
+    emit(CategoryLoaded(
+        categories: state.categories, selectedCategory: event.category));
+  }
 }
