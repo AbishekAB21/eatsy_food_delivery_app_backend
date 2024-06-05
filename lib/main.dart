@@ -1,3 +1,4 @@
+import 'package:eatsy_food_delivery_app_backend/bloc/category/category_bloc.dart';
 import 'package:eatsy_food_delivery_app_backend/bloc/settings/settings_bloc.dart';
 import 'package:eatsy_food_delivery_app_backend/models/category_model.dart';
 import 'package:eatsy_food_delivery_app_backend/models/opening_hours.dart';
@@ -30,7 +31,11 @@ class MyApp extends StatelessWidget {
                 Category.categories,
                 Product.products,
                 OpeningHours.openingHoursList,
-              ))))
+              )))),
+        BlocProvider(
+          create: (context) => CategoryBloc()
+            ..add(LoadCategories(categories: Category.categories)),
+        )
       ],
       child: MaterialApp(
         title: "Eatsy Food Delivery App Backend",

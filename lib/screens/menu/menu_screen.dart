@@ -1,3 +1,4 @@
+import 'package:eatsy_food_delivery_app_backend/bloc/category/category_bloc.dart';
 import 'package:eatsy_food_delivery_app_backend/config/responsive.dart';
 import 'package:eatsy_food_delivery_app_backend/models/category_model.dart';
 import 'package:eatsy_food_delivery_app_backend/models/product_model.dart';
@@ -9,6 +10,7 @@ import 'package:eatsy_food_delivery_app_backend/widgets/custom_layout.dart';
 import 'package:eatsy_food_delivery_app_backend/widgets/product_card.dart';
 import 'package:eatsy_food_delivery_app_backend/widgets/product_list_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MenuScreen extends StatelessWidget {
   const MenuScreen({super.key});
@@ -93,30 +95,70 @@ class MenuScreen extends StatelessWidget {
       padding: EdgeInsets.all(20),
       color: apptheme.ContainerColor,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Categories",
-                  style: apptheme.headline3Black,
-                ),
-                IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.add_circle_rounded,
-                      color: apptheme.primaryColor2,
-                    ))
-              ],
-            ),
+          Text("Categories", style: apptheme.headline3Black),
+          BlocBuilder<CategoryBloc, CategoryState>(
+            builder: (context, state) {
+              if (state is CategoryLoading) {
+                return CircularProgressIndicator(
+                  color: apptheme.primaryColor2,
+                );
+              }
+
+              if (state is CategoryLoaded) {
+                return ReorderableListView(
+                    shrinkWrap: true,
+                    children: [
+                      for (int index = 0;
+                          index < state.categories.length;
+                          index++,)
+                        CategoryListTile(
+                          category: state.categories[index],
+                          onTap: () {},
+                          key: ValueKey(state.categories[index].id),
+                        ),
+                    ],
+                    onReorder: ((oldIndex, newIndex) {
+                      context.read<CategoryBloc>().add(
+                          Sortcategory(oldIndex: oldIndex, newIndex: newIndex));
+                    }));
+
+                // Container(
+                //   padding: EdgeInsets.all(20),
+                //   color: apptheme.ContainerColor,
+                //   child: Column(
+                //     crossAxisAlignment: CrossAxisAlignment.start,
+                //     children: [
+                //       Padding(
+                //         padding: const EdgeInsets.all(20.0),
+                //         child: Row(
+                //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //           children: [
+                //             Text(
+                //               "Categories",
+                //               style: apptheme.headline3Black,
+                //             ),
+                //             IconButton(
+                //                 onPressed: () {},
+                //                 icon: Icon(
+                //                   Icons.add_circle_rounded,
+                //                   color: apptheme.primaryColor2,
+                //                 ))
+                //           ],
+                //         ),
+                //       ),
+                //       SizedBox(height: 20),
+                //       ...Category.categories.map((category) {
+                //         return CategoryListTile(category: category);
+                //       }).toList(),
+                //     ],
+                //   ),
+                // );
+              } else {
+                return Text("Something went wrong");
+              }
+            },
           ),
-          SizedBox(height: 20),
-          ...Category.categories.map((category) {
-            return CategoryListTile(category: category);
-          }).toList(),
         ],
       ),
     );

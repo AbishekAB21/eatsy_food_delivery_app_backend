@@ -4,16 +4,18 @@ import 'package:flutter/material.dart';
 
 class CategoryListTile extends StatelessWidget {
   const CategoryListTile({
-    super.key, required this.category
+    super.key, required this.category, required this.onTap,
   });
   final Category category;
+  final Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: onTap,
       leading: Image.asset(category.imageUrl, height: 25,),
       title: Text(category.name, style: apptheme.headline5,),
       subtitle: Text(category.description, style: apptheme.bodyText1,),
-      trailing: Icon(Icons.menu_rounded, color: apptheme.primaryColor2,),
+      //trailing: Icon(Icons.menu_rounded, color: apptheme.primaryColor2,),
     );
   }
 }
