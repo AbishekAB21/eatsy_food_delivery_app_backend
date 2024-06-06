@@ -7,6 +7,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool hasTitle;
   final String initialValue;
   final Function(String)? onChanged;
+  final Color? borderColor;
 
   const CustomTextFormField({
     super.key,
@@ -15,6 +16,7 @@ class CustomTextFormField extends StatelessWidget {
     required this.hasTitle,
     required this.initialValue,
     this.onChanged,
+    this.borderColor,
   });
 
   @override
@@ -28,7 +30,7 @@ class CustomTextFormField extends StatelessWidget {
             width: 75,
             child: Text(
               title,
-              style: apptheme.headline3Black,
+              style: apptheme.headline2Black,
             ),
           ): SizedBox(),
           Expanded(
@@ -36,15 +38,18 @@ class CustomTextFormField extends StatelessWidget {
               maxLines: maxlines,
               initialValue: initialValue,
               onChanged: onChanged,
+              
               onEditingComplete: () {
                 print("Done");
               },
               decoration: InputDecoration(
                   isDense: true,
+                  disabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: apptheme.primaryColor2)),
                   focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: apptheme.primaryColor2)),
                   enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: apptheme.primaryColor))),
+                      borderSide: BorderSide(color: apptheme.ShadowColor))),
             ),
           ),
         ],

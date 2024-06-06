@@ -1,7 +1,6 @@
 import 'package:eatsy_food_delivery_app_backend/bloc/category/category_bloc.dart';
 import 'package:eatsy_food_delivery_app_backend/bloc/product/product_bloc.dart';
 import 'package:eatsy_food_delivery_app_backend/config/responsive.dart';
-import 'package:eatsy_food_delivery_app_backend/models/product_model.dart';
 import 'package:eatsy_food_delivery_app_backend/utils/apptheme.dart';
 import 'package:eatsy_food_delivery_app_backend/widgets/category_list_tile.dart';
 import 'package:eatsy_food_delivery_app_backend/widgets/custom_app_bar.dart';
@@ -24,19 +23,7 @@ class MenuScreen extends StatelessWidget {
       body: CustomLayout(
         title: "Restaurant Menu",
         widgets: [
-          Container(
-            height: 200,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: Product.products.length,
-              itemBuilder: (BuildContext context, int index) {
-                return ProductCard(
-                  product: Product.products[index],
-                  index: index,
-                );
-              },
-            ),
-          ),
+          _buildProductSection(),
           SizedBox(height: 20),
           Responsive.isWideDesktop(context) || Responsive.isDesktop(context)
               ? Container(
@@ -66,6 +53,33 @@ class MenuScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  BlocBuilder<ProductBloc, ProductState> _buildProductSection() {
+    return BlocBuilder<ProductBloc, ProductState>(
+          builder: (context, state) {
+            if(state is ProductLoading){
+              return CircularProgressIndicator(color: apptheme.primaryColor2,);
+            }
+            if(state is ProductLoaded)
+            {return Container(
+              height: 200,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: state.products.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return ProductCard(
+                    product: state.products[index],
+                    index: index,
+                  );
+                },
+              ),
+            );}
+            else{
+              return Text("Something went wrong");
+            }
+          },
+        );
   }
 
   Container _buildProductTile() {

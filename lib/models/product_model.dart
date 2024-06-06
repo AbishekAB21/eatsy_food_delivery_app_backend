@@ -1,22 +1,21 @@
 import 'package:equatable/equatable.dart';
 
 class Product extends Equatable {
-  final String id;
+  final String? id;
   final String name;
   final String category;
   final String description;
   final String imageUrl;
   final double price;
-  final int index;
 
-  Product(
-      {required this.id,
-      required this.name,
-      required this.category,
-      required this.description,
-      required this.imageUrl,
-      required this.price,
-      required this.index});
+  Product({
+     this.id,
+    required this.name,
+    required this.category,
+    required this.description,
+    required this.imageUrl,
+    required this.price,
+  });
 
   Product copyWith({
     String? id,
@@ -25,16 +24,15 @@ class Product extends Equatable {
     String? description,
     String? imageUrl,
     double? price,
-    int? index,
   }) {
     return Product(
-        id: id ?? this.id,
-        name: name ?? this.name,
-        category: category ?? this.category,
-        description: description ?? this.description,
-        imageUrl: imageUrl ?? this.imageUrl,
-        price: price ?? this.price,
-        index: index ?? this.index);
+      id: id ?? this.id,
+      name: name ?? this.name,
+      category: category ?? this.category,
+      description: description ?? this.description,
+      imageUrl: imageUrl ?? this.imageUrl,
+      price: price ?? this.price,
+    );
   }
 
   factory Product.fromSnapshot(Map<String, dynamic> snap) {
@@ -45,13 +43,18 @@ class Product extends Equatable {
       description: snap['description'],
       imageUrl: snap['imageUrl'],
       price: snap['price'],
-      index: snap['index'],
     );
   }
 
   @override
-  List<Object?> get props =>
-      [id, name, category, description, imageUrl, price, index];
+  List<Object?> get props => [
+        id,
+        name,
+        category,
+        description,
+        imageUrl,
+        price,
+      ];
 
   static List<Product> products = [
     Product(
@@ -62,7 +65,6 @@ class Product extends Equatable {
       imageUrl:
           "https://images.unsplash.com/photo-1598023696416-0193a0bcd302?q=80&w=2736&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       price: 120,
-      index: 0,
     ),
     Product(
       id: '2',
@@ -72,7 +74,6 @@ class Product extends Equatable {
       imageUrl:
           "https://images.unsplash.com/photo-1598023696416-0193a0bcd302?q=80&w=2736&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       price: 320,
-      index: 1,
     ),
     Product(
       id: '3',
@@ -82,7 +83,6 @@ class Product extends Equatable {
       imageUrl:
           "https://images.unsplash.com/photo-1598023696416-0193a0bcd302?q=80&w=2736&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       price: 180,
-      index: 2,
     ),
     Product(
       id: '4',
@@ -92,7 +92,6 @@ class Product extends Equatable {
       imageUrl:
           "https://images.unsplash.com/photo-1598023696416-0193a0bcd302?q=80&w=2736&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       price: 310,
-      index: 3,
     ),
     Product(
       id: '5',
@@ -102,7 +101,6 @@ class Product extends Equatable {
       imageUrl:
           "https://images.unsplash.com/photo-1598023696416-0193a0bcd302?q=80&w=2736&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       price: 310,
-      index: 4,
     ),
     Product(
       id: '6',
@@ -112,7 +110,6 @@ class Product extends Equatable {
       imageUrl:
           "https://images.unsplash.com/photo-1598023696416-0193a0bcd302?q=80&w=2736&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       price: 140,
-      index: 5,
     ),
     Product(
       id: '7',
@@ -122,7 +119,6 @@ class Product extends Equatable {
       imageUrl:
           "https://images.unsplash.com/photo-1598023696416-0193a0bcd302?q=80&w=2736&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       price: 210,
-      index: 6,
     ),
     Product(
       id: '8',
@@ -132,7 +128,6 @@ class Product extends Equatable {
       imageUrl:
           "https://images.unsplash.com/photo-1598023696416-0193a0bcd302?q=80&w=2736&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       price: 110,
-      index: 7,
     ),
   ];
 }

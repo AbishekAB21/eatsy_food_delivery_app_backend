@@ -8,6 +8,17 @@ sealed class ProductEvent extends Equatable {
 }
 
 
+class AddProduct extends ProductEvent {
+  
+  final Product product;
+
+  const AddProduct({required this.product});
+
+  @override
+  List<Object> get props => [product];
+}
+
+
 // Used to show all the products when the app starts 
 class LoadProducts extends ProductEvent{
 

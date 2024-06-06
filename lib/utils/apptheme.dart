@@ -17,6 +17,7 @@ abstract class AppTheme {
   final TextStyle LoginHintText;
   final TextStyle ButtonText;
   final TextStyle ButtonText2;
+   final TextStyle ButtonText3;
   final TextStyle ForgotPasswordText;
   final TextStyle ErrorMessage;
   final TextStyle HomeScreenAppBar;
@@ -35,6 +36,7 @@ abstract class AppTheme {
   final TextStyle healdline4;
   final TextStyle bodyText1;
   final TextStyle headline3Black;
+  final TextStyle headline2Black;
 
   AppTheme({
     required this.primaryColor,
@@ -47,6 +49,7 @@ abstract class AppTheme {
     required this.LoginHintText,
     required this.ButtonText,
     required this.ButtonText2,
+    required this.ButtonText3,
     required this.ForgotPasswordText,
     required this.SnackBarColor,
     required this.ErrorColor,
@@ -69,6 +72,7 @@ abstract class AppTheme {
     required this.healdline4,
     required this.bodyText1,
     required this.headline3Black,
+    required this.headline2Black,
   });
 }
 
@@ -103,6 +107,8 @@ class AppDefaultTheme extends AppTheme {
             ButtonText: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ButtonText2: TextStyle(
                 fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white),
+            ButtonText3: TextStyle(
+                fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
             ErrorColor: Colors.red.shade900,
             ShadowColor: Colors.black,
             ErrorMessage: TextStyle(
@@ -151,5 +157,10 @@ class AppDefaultTheme extends AppTheme {
             headline3Black: TextStyle(
                 fontSize: 16,
                 color: Colors.black, fontWeight: FontWeight.bold
-            ),);
+            ),
+            headline2Black: TextStyle(
+                fontSize: 12,
+                color: Colors.black, fontWeight: FontWeight.bold
+            ),
+            );
 }

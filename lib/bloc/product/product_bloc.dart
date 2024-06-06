@@ -23,6 +23,7 @@ a category has been selected.
     on<LoadProducts>(_onLoadProducts);
     on<UpdateProducts>(_onUpdateProducts);
     on<SortProducts>(_onSortProducts);
+    on<AddProduct>(_onAddProducts);
 
 /* 
 Here with the help of stream we will listen to the state changes.
@@ -30,12 +31,28 @@ depending on the fulfilment of the conditional statements, we will
 call UpdateProducts and pass the selectedCategory so that the products 
 can be sorted as per that category.
 */
-_categorySubscription = _categoryBloc.stream.listen((state) {
-  if(state is CategoryLoaded && state.selectedCategory != null){
-   add (UpdateProducts(category: state.selectedCategory!));
+    _categorySubscription = _categoryBloc.stream.listen((state) {
+      if (state is CategoryLoaded && state.selectedCategory != null) {
+        add(UpdateProducts(category: state.selectedCategory!));
+      }
+    });
   }
-});
+
+ void _onAddProducts(AddProduct event, Emitter<ProductState> emit) async {
+
+/* 
+Here in order to add new products, we first take the existing List coming 
+from the bloc and to that we add a new product that is coming from the event
+*/
+  if (state is ProductLoaded) {
+    final currentState = state as ProductLoaded;
+    final updatedProducts = List<Product>.from(currentState.products)
+      ..add(event.product);
+
+    emit(ProductLoaded(products: updatedProducts));
   }
+}
+
 
   void _onLoadProducts(LoadProducts event, Emitter<ProductState> emit) async {
     await Future.delayed(Duration(seconds: 1));
@@ -58,8 +75,7 @@ the new list of products to be displayed.
     emit(ProductLoaded(products: filterProducts));
   }
 
-  void _onSortProducts(SortProducts event, Emitter<ProductState> emit) async{
-
+  void _onSortProducts(SortProducts event, Emitter<ProductState> emit) async {
     final state = this.state as ProductLoaded;
     emit(ProductLoading());
     await Future.delayed(Duration(seconds: 1));
