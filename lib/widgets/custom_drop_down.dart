@@ -1,4 +1,3 @@
-import 'package:eatsy_food_delivery_app_backend/models/category_model.dart';
 import 'package:eatsy_food_delivery_app_backend/utils/apptheme.dart';
 import 'package:flutter/material.dart';
 

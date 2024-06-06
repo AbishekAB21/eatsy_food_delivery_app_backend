@@ -1,16 +1,20 @@
 import 'package:eatsy_food_delivery_app_backend/bloc/category/category_bloc.dart';
 import 'package:eatsy_food_delivery_app_backend/bloc/product/product_bloc.dart';
 import 'package:eatsy_food_delivery_app_backend/bloc/settings/settings_bloc.dart';
+import 'package:eatsy_food_delivery_app_backend/firebase_options.dart';
 import 'package:eatsy_food_delivery_app_backend/models/category_model.dart';
 import 'package:eatsy_food_delivery_app_backend/models/opening_hours.dart';
 import 'package:eatsy_food_delivery_app_backend/models/product_model.dart';
 import 'package:eatsy_food_delivery_app_backend/models/restaurant_model.dart';
 import 'package:eatsy_food_delivery_app_backend/screens/menu/menu_screen.dart';
 import 'package:eatsy_food_delivery_app_backend/screens/settings/settings_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
