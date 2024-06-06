@@ -29,6 +29,27 @@ class OpeningHours extends Equatable {
         isOpen: isOpen ?? this.isOpen);
   }
 
+// Used to covert model into a map for Firebase
+  Map<String, dynamic> toDocument(){
+
+    return{
+      'id' : id,
+      'day' : day,
+      'openAt' : openAt,
+      'closeAtt' : closeAt,
+      'isOpen' : isOpen,
+    };
+  }
+
+  factory OpeningHours.fromSnapshot(Map<String, dynamic> snap) {
+    return OpeningHours(
+        id: snap['id'],
+        day: snap['day'],
+        openAt: snap['openAt'],
+        closeAt: snap['closeAt'],
+        isOpen: snap['isOpen']);
+  }
+
   @override
   List<Object?> get props => [id, day, openAt, closeAt, isOpen];
 

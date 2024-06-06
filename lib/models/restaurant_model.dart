@@ -1,3 +1,6 @@
+import 'dart:html';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eatsy_food_delivery_app_backend/models/category_model.dart';
 import 'package:eatsy_food_delivery_app_backend/models/opening_hours.dart';
 import 'package:eatsy_food_delivery_app_backend/models/product_model.dart';
@@ -48,7 +51,47 @@ class Restaurant extends Equatable {
         products ?? this.products,
         openingHours ?? this.openingHours);
   }
- 
+
+  Map<String, dynamic> toDocument() {
+    return {
+      'id': id ?? '',
+      'name': name ?? '',
+      'description': description ?? '',
+      'tags': tags ?? [],
+// We are mapping it and returning them as a list of document
+      'categories': categories!.map((category) {
+        return category.toDocument();
+      }).toList(),
+      'products': products!.map((product) {
+        return product.toDocument();
+      }).toList(),
+      'openingHours': openingHours!.map((openinghours) {
+        return openinghours.toDocument();
+      }).toList(),
+    };
+  }
+
+  factory Restaurant.fromSnapshot(DocumentSnapshot snap) {
+    return Restaurant(
+      snap.id,
+      snap['name'],
+      snap['imageUrl'],
+      snap['description'],
+      (snap['tags'] as List).map((tag) {
+        return tag as String;
+      }).toList(),
+      (snap['categories'] as List).map((category) {
+        return Category.fromSnapshot(category);
+      }).toList(),
+      (snap['products'] as List).map((product) {
+        return Product.fromSnapshot(product);
+      }).toList(),
+      (snap['openingHours'] as List).map((openinghours) {
+        return OpeningHours.fromSnapshot(openinghours);
+      }).toList(),
+    );
+  }
+
   static List<Restaurant> restaurants = [
     Restaurant(
         '1',

@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 
 class Product extends Equatable {
   final String? id;
+  final String? restaurantId;
   final String name;
   final String category;
   final String description;
@@ -10,6 +11,7 @@ class Product extends Equatable {
 
   Product({
      this.id,
+     this.restaurantId,
     required this.name,
     required this.category,
     required this.description,
@@ -19,6 +21,7 @@ class Product extends Equatable {
 
   Product copyWith({
     String? id,
+    String? restaurantId,
     String? name,
     String? category,
     String? description,
@@ -27,6 +30,7 @@ class Product extends Equatable {
   }) {
     return Product(
       id: id ?? this.id,
+      restaurantId: restaurantId ?? this.restaurantId,
       name: name ?? this.name,
       category: category ?? this.category,
       description: description ?? this.description,
@@ -35,9 +39,22 @@ class Product extends Equatable {
     );
   }
 
+  Map<String, dynamic> toDocument(){
+    return{
+      'id' : id,
+      'restaurantId' : restaurantId,
+      'name' : name,
+      'category' : category,
+      'description' : description,
+      'imageUrl' : imageUrl,
+      'price' : price,
+    };
+  }
+
   factory Product.fromSnapshot(Map<String, dynamic> snap) {
     return Product(
-      id: snap['id'],
+      id: snap['id'].toString(),
+      restaurantId: snap['restaurantId'],
       name: snap['name'],
       category: snap['category'],
       description: snap['description'],
@@ -49,6 +66,7 @@ class Product extends Equatable {
   @override
   List<Object?> get props => [
         id,
+        restaurantId,
         name,
         category,
         description,
@@ -59,6 +77,7 @@ class Product extends Equatable {
   static List<Product> products = [
     Product(
       id: '1',
+      restaurantId: "ANjuVdh2xl8Au6RyHEK5",
       name: 'Margherita',
       category: 'Pizza',
       description: 'Tomatoes, Onions and Mozzerella Cheese',
@@ -68,6 +87,7 @@ class Product extends Equatable {
     ),
     Product(
       id: '2',
+      restaurantId: "ANjuVdh2xl8Au6RyHEK5",
       name: 'Cocoa-Cola',
       category: 'Drinks',
       description: 'Chicken, Onions and Mozzerella Cheese',
@@ -77,6 +97,7 @@ class Product extends Equatable {
     ),
     Product(
       id: '3',
+      restaurantId: "ANjuVdh2xl8Au6RyHEK5",
       name: 'Spanish Delight',
       category: 'Desserts',
       description: 'Tomatoes, Paneer and Cheese',
@@ -86,6 +107,7 @@ class Product extends Equatable {
     ),
     Product(
       id: '4',
+      restaurantId: "ANjuVdh2xl8Au6RyHEK5",
       name: 'Pepperoni',
       category: 'Pizza',
       description: 'Pepperonni, Onions and Mozzerella Cheese',
@@ -95,6 +117,7 @@ class Product extends Equatable {
     ),
     Product(
       id: '5',
+      restaurantId: "ANjuVdh2xl8Au6RyHEK5",
       name: 'Chicago Pizza',
       category: 'Pizza',
       description: 'Cheese, Meat and Veggies',
@@ -104,6 +127,7 @@ class Product extends Equatable {
     ),
     Product(
       id: '6',
+      restaurantId: "ANjuVdh2xl8Au6RyHEK5",
       name: 'Cheese Pizza',
       category: 'Pizza',
       description: 'Pepperonni, Onions and Mozzerella Cheese',
@@ -113,6 +137,7 @@ class Product extends Equatable {
     ),
     Product(
       id: '7',
+      restaurantId: "ANjuVdh2xl8Au6RyHEK5",
       name: 'Greek Salad',
       category: 'Salads',
       description: 'Jalapenos, Onions and Mozzerella Cheese',
@@ -122,6 +147,7 @@ class Product extends Equatable {
     ),
     Product(
       id: '8',
+      restaurantId: "ANjuVdh2xl8Au6RyHEK5",
       name: 'CheeseBurger',
       category: 'Burger',
       description: 'Capsicum, Onions and Mozzerella Cheese',

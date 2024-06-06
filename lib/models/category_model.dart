@@ -29,9 +29,25 @@ class Category extends Equatable {
         index: index ?? this.index);
   }
 
+
+/* 
+With this toDocument method we can save convert the model into a map and save
+it to the firebase databsase
+*/
+  Map<String, dynamic> toDocument(){
+
+    return {
+      'id' : id,
+      'name' : name,
+      'decription' : description,
+      'imageUrl' : imageUrl,
+      'index' : index
+    };
+  }
+
   factory Category.fromSnapshot(Map<String, dynamic> snap) {
     return Category(
-        id: snap['id'],
+        id: snap['id'].toString(),
         name: snap['name'],
         description: snap['description'],
         imageUrl: snap['imageUrl'],
