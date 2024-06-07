@@ -19,13 +19,20 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     on<UpdateSettings>(_onUpdateSettings);
     on<UpdateOpeningHours>(_onUpdateOpeningHours);
 
-    _restaurantSubscription =
-        _restaurantRepository.getRestaurant().listen((restaurant) {
-      print("I'm here now");
-      print(restaurant);
-
-      add(LoadSettings(restaurant: restaurant));
-    });
+    _restaurantSubscription = _restaurantRepository.getRestaurant().listen(
+      (restaurant) {
+        try {
+          print("I'm here now");
+          print(restaurant);
+          add(LoadSettings(restaurant: restaurant));
+        } catch (e) {
+          print("Error in subscription: $e");
+        }
+      },
+      onError: (error) {
+        print("Stream error: $error");
+      },
+    );
   }
 
   void _onLoadSettings(
@@ -69,8 +76,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     }
   }
 
-  @override 
-  Future<void> close() async{
+  @override
+  Future<void> close() async {
     _restaurantSubscription?.cancel();
     super.close();
   }

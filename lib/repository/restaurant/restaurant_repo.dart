@@ -50,21 +50,18 @@ class RestaurantRepository extends BaseRestaurantRepository {
   }
 
   @override
-  Stream<Restaurant> getRestaurant() {
-  // Here we are returning a restaurant object 
-  // We used snapshot to keep listening to the change
-    return _firebaseFirestore
-        .collection('restaurants')
-        .doc('ANjuVdh2xl8Au6RyHEK5')
-        .snapshots()
-        .map((snapshot) {
-          if(snapshot.exists){
-            print("restaurant found");
-            return Restaurant.fromSnapshot(snapshot);
-          }else{
-           throw Exception ("Restaurant not found in database");
-          }
-      
-    });
+ Stream<Restaurant> getRestaurant() {
+  return _firebaseFirestore
+      .collection('restaurants')
+      .doc('ANjuVdh2xl8Au6RyHEK5')
+      .snapshots()
+      .map((snapshot) {
+    if (snapshot.exists) {
+      print("Restaurant found: ${snapshot.data()}");  // Add this line
+      return Restaurant.fromSnapshot(snapshot);
+    } else {
+      throw Exception("Restaurant not found in database");
+    }
+  });
   }
 }

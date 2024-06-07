@@ -66,9 +66,14 @@ class Restaurant extends Equatable {
       'imageUrl': imageUrl ?? '',
       'description': description ?? '',
       'tags': tags ?? [],
-      'categories': categories?.map((category) => category.toDocument()).toList() ?? [],
-      'products': products?.map((product) => product.toDocument()).toList() ?? [],
-      'openingHours': openingHours?.map((openinghours) => openinghours.toDocument()).toList() ?? [],
+      'categories':
+          categories?.map((category) => category.toDocument()).toList() ?? [],
+      'products':
+          products?.map((product) => product.toDocument()).toList() ?? [],
+      'openingHours': openingHours
+              ?.map((openinghours) => openinghours.toDocument())
+              .toList() ??
+          [],
     };
   }
 
@@ -78,10 +83,22 @@ class Restaurant extends Equatable {
       name: snap['name'],
       imageUrl: snap['imageUrl'],
       description: snap['description'],
-      tags: (snap['tags'] as List<dynamic>?)?.map((tag) => tag as String).toList() ?? [],
-      categories: (snap['categories'] as List<dynamic>?)?.map((category) => Category.fromSnapshot(category)).toList() ?? [],
-      products: (snap['products'] as List<dynamic>?)?.map((product) => Product.fromSnapshot(product)).toList() ?? [],
-      openingHours: (snap['openingHours'] as List<dynamic>?)?.map((openinghours) => OpeningHours.fromSnapshot(openinghours)).toList() ?? [],
+      tags: (snap['tags'] as List<dynamic>?)
+              ?.map((tag) => tag as String)
+              .toList() ??
+          [],
+      categories: (snap['categories'] as List<dynamic>?)
+              ?.map((category) => Category.fromSnapshot(category))
+              .toList() ??
+          [],
+      products: (snap['products'] as List<dynamic>?)
+              ?.map((product) => Product.fromSnapshot(product))
+              .toList() ??
+          [],
+      openingHours: (snap['openingHours'] as List<dynamic>?)
+              ?.map((openinghours) => OpeningHours.fromSnapshot(openinghours))
+              .toList() ??
+          [],
     );
   }
 
@@ -89,7 +106,8 @@ class Restaurant extends Equatable {
     Restaurant(
       id: '1',
       name: 'Golden Gate Restaurant',
-      imageUrl: "https://plus.unsplash.com/premium_photo-1670984940113-f3aa1cd1309a?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      imageUrl:
+          "https://plus.unsplash.com/premium_photo-1670984940113-f3aa1cd1309a?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       description: "This is a description",
       tags: ['Italian', 'Desserts'],
       categories: Category.categories,

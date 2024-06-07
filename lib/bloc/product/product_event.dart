@@ -31,11 +31,11 @@ class LoadProducts extends ProductEvent{
 }
 
 // Used to update the products and filter it based on category
-class UpdateProducts extends ProductEvent{
+class FilterProducts extends ProductEvent{
 
   final Category category;
 
-  UpdateProducts({required this.category});
+  FilterProducts({required this.category});
 
   @override
   List<Object> get props => [category];

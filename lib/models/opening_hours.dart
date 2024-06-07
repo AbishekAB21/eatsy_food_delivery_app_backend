@@ -43,7 +43,7 @@ class OpeningHours extends Equatable {
 
   factory OpeningHours.fromSnapshot(Map<String, dynamic> snap) {
     return OpeningHours(
-        id: snap['id'],
+        id: snap['id'].toString(),
         day: snap['day'],
         openAt: snap['openAt'],
         closeAt: snap['closeAt'],

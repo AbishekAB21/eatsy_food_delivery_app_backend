@@ -4,16 +4,22 @@ import 'package:bloc/bloc.dart';
 import 'package:eatsy_food_delivery_app_backend/bloc/category/category_bloc.dart';
 import 'package:eatsy_food_delivery_app_backend/models/category_model.dart';
 import 'package:eatsy_food_delivery_app_backend/models/product_model.dart';
+import 'package:eatsy_food_delivery_app_backend/repository/restaurant/restaurant_repo.dart';
 import 'package:equatable/equatable.dart';
 
 part 'product_event.dart';
 part 'product_state.dart';
 
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
+  final RestaurantRepository _restaurantRepository;
   final CategoryBloc _categoryBloc;
+  StreamSubscription? _restaurantSubscription;
   StreamSubscription? _categorySubscription;
-  ProductBloc({required CategoryBloc categoryBloc})
-      : _categoryBloc = categoryBloc,
+  ProductBloc({
+    required CategoryBloc categoryBloc,
+    required RestaurantRepository restaurantRepository,
+  })  : _categoryBloc = categoryBloc,
+        _restaurantRepository = restaurantRepository,
 /* 
 The above code makes it possible for us to keep in 
 track of all the state changes and to know if or whern 
@@ -21,7 +27,7 @@ a category has been selected.
 */
         super(ProductLoading()) {
     on<LoadProducts>(_onLoadProducts);
-    on<UpdateProducts>(_onUpdateProducts);
+    on<FilterProducts>(_onFilterProducts);
     on<SortProducts>(_onSortProducts);
     on<AddProduct>(_onAddProducts);
 
@@ -33,34 +39,40 @@ can be sorted as per that category.
 */
     _categorySubscription = _categoryBloc.stream.listen((state) {
       if (state is CategoryLoaded && state.selectedCategory != null) {
-        add(UpdateProducts(category: state.selectedCategory!));
+        add(FilterProducts(category: state.selectedCategory!));
       }
+    });
+
+    _restaurantSubscription =
+        _restaurantRepository.getRestaurant().listen((restaurant) {
+      add(LoadProducts(products: restaurant.products!));
     });
   }
 
- void _onAddProducts(AddProduct event, Emitter<ProductState> emit) async {
-
+  void _onAddProducts(AddProduct event, Emitter<ProductState> emit) async {
 /* 
 Here in order to add new products, we first take the existing List coming 
 from the bloc and to that we add a new product that is coming from the event
 */
-  if (state is ProductLoaded) {
-    final currentState = state as ProductLoaded;
-    final updatedProducts = List<Product>.from(currentState.products)
-      ..add(event.product);
+    if (state is ProductLoaded) {
+      final currentState = state as ProductLoaded;
+      List<Product> newProducts = List<Product>.from(currentState.products)
+        ..add(event.product);
 
-    emit(ProductLoaded(products: updatedProducts));
+      _restaurantRepository.editProducts(newProducts);
+
+      emit(ProductLoaded(products: newProducts));
+
+    }
   }
-}
-
 
   void _onLoadProducts(LoadProducts event, Emitter<ProductState> emit) async {
     await Future.delayed(Duration(seconds: 1));
     emit(ProductLoaded(products: event.products));
   }
 
-  void _onUpdateProducts(
-      UpdateProducts event, Emitter<ProductState> emit) async {
+  void _onFilterProducts(
+      FilterProducts event, Emitter<ProductState> emit) async {
     emit(ProductLoading());
     await Future.delayed(Duration(seconds: 1));
 
@@ -100,6 +112,13 @@ the list
       // emits new Category Loaded with updated/shuffled categories
       emit(ProductLoaded(products: sortProducts));
     } catch (_) {}
+  }
+
+  @override
+  Future<void> close() async{
+    _categorySubscription?.cancel();
+    _restaurantSubscription?.cancel();
+    super.close();
   }
 
   void _onSelectCategory(SelectCategory event, Emitter<CategoryState> emit) {

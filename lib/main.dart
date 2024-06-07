@@ -37,6 +37,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(
               create: (context) => ProductBloc(
                     categoryBloc: BlocProvider.of<CategoryBloc>(context),
+                     restaurantRepository: context.read<RestaurantRepository>()
                   )..add(LoadProducts(products: Product.products)))
         ],
         child: MaterialApp(
