@@ -58,7 +58,13 @@ class RestaurantRepository extends BaseRestaurantRepository {
         .doc('ANjuVdh2xl8Au6RyHEK5')
         .snapshots()
         .map((snapshot) {
-      return Restaurant.fromSnapshot(snapshot);
+          if(snapshot.exists){
+            print("restaurant found");
+            return Restaurant.fromSnapshot(snapshot);
+          }else{
+           throw Exception ("Restaurant not found in database");
+          }
+      
     });
   }
 }

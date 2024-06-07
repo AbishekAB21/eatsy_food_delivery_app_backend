@@ -4,7 +4,6 @@ import 'package:eatsy_food_delivery_app_backend/bloc/settings/settings_bloc.dart
 import 'package:eatsy_food_delivery_app_backend/firebase_options.dart';
 import 'package:eatsy_food_delivery_app_backend/models/category_model.dart';
 import 'package:eatsy_food_delivery_app_backend/models/product_model.dart';
-import 'package:eatsy_food_delivery_app_backend/models/restaurant_model.dart';
 import 'package:eatsy_food_delivery_app_backend/repository/restaurant/restaurant_repo.dart';
 import 'package:eatsy_food_delivery_app_backend/screens/menu/menu_screen.dart';
 import 'package:eatsy_food_delivery_app_backend/screens/settings/settings_screen.dart';
