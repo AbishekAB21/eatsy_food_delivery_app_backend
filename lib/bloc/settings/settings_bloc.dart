@@ -33,8 +33,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     // An Emitter is a class which is capable of emitting new states
   ) async {
     await Future<void>.delayed(Duration(seconds: 1));
-    emit(SettingsLoaded(event.restaurant.copyWith(openingHours: event.restaurant.openingHours ?? [])));
-    print('Loaded restaurant: ${event.restaurant}');
+    emit(SettingsLoaded(event.restaurant));
     /* 
        After waiting for a second, emit a SettingsLoaded state 
        with information about the specific restaurant
@@ -69,7 +68,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     }
   }
 
-    @override 
+  @override 
   Future<void> close() async{
     _restaurantSubscription?.cancel();
     super.close();

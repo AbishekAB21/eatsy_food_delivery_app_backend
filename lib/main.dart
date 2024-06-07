@@ -30,8 +30,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(
               create: (context) => SettingsBloc(
                   restaurantRepository: context.read<RestaurantRepository>())
-                ..add(LoadSettings(
-                    restaurant: Restaurant(null,null,null,null,null,null,null,null)))),
+                ..add(LoadSettings())),
           BlocProvider(
             create: (context) => CategoryBloc()
               ..add(LoadCategories(categories: Category.categories)),

@@ -13,7 +13,7 @@ class LoadSettings extends SettingsEvent {
 
   LoadSettings(
       {this.restaurant =
-          const Restaurant(null, null, null, null, null, null, null, null)});
+          const Restaurant()});
 
   @override
   List<Object> get props => [restaurant];
@@ -24,7 +24,7 @@ class UpdateSettings extends SettingsEvent {
   final bool isUpdateComplete;
   final Restaurant restaurant;
 
-  UpdateSettings(Restaurant copyWith,
+  UpdateSettings(
       {this.isUpdateComplete = false, required this.restaurant});
 
   @override

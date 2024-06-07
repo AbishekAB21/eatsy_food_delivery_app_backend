@@ -117,6 +117,7 @@ class SettingsScreen extends StatelessWidget {
             );
           }
           if (state is SettingsLoaded) {
+            
             return Column(
               children: [
                 Text(
@@ -135,7 +136,7 @@ class SettingsScreen extends StatelessWidget {
                   maxlines: 1,
                   onChanged: (value) {
                     context.read<SettingsBloc>().add(
-                        UpdateSettings(state.restaurant.copyWith(name: value), restaurant:  state.restaurant));
+                        UpdateSettings( restaurant:  state.restaurant));
                   },
                 ),
                 CustomTextFormField(
@@ -147,7 +148,7 @@ class SettingsScreen extends StatelessWidget {
                   maxlines: 1,
                   onChanged: (value) {
                     context.read<SettingsBloc>().add(UpdateSettings(
-                        state.restaurant.copyWith(imageUrl: value), restaurant:  state.restaurant));
+                         restaurant:  state.restaurant));
                   },
                 ),
                 CustomTextFormField(
@@ -159,7 +160,7 @@ class SettingsScreen extends StatelessWidget {
                   maxlines: 1,
                   onChanged: (value) {
                     context.read<SettingsBloc>().add(UpdateSettings(
-                        state.restaurant.copyWith(tags: value.split(',')), restaurant:  state.restaurant));
+                        restaurant:  state.restaurant));
                   },
                 ),
               ],
@@ -229,7 +230,7 @@ class SettingsScreen extends StatelessWidget {
                   maxlines: 5,
                   onChanged: (value) {
                     context.read<SettingsBloc>().add(UpdateSettings(
-                        state.restaurant.copyWith(description: value), restaurant: state.restaurant));
+                        restaurant: state.restaurant));
                   },
                 ),
               ],
