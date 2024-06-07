@@ -1,16 +1,30 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:eatsy_food_delivery_app_backend/models/opening_hours.dart';
 import 'package:eatsy_food_delivery_app_backend/models/restaurant_model.dart';
+import 'package:eatsy_food_delivery_app_backend/repository/restaurant/restaurant_repo.dart';
 import 'package:equatable/equatable.dart';
 
 part 'settings_event.dart';
 part 'settings_state.dart';
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
-  SettingsBloc() : super(SettingsLoading()) {
+  final RestaurantRepository _restaurantRepository;
+  StreamSubscription? _restaurantSubscription;
+  SettingsBloc({required RestaurantRepository restaurantRepository})
+      : _restaurantRepository = restaurantRepository,
+        super(SettingsLoading()) {
     on<LoadSettings>(_onLoadSettings);
     on<UpdateSettings>(_onUpdateSettings);
     on<UpdateOpeningHours>(_onUpdateOpeningHours);
+
+    _restaurantSubscription =
+        _restaurantRepository.getRestaurant().listen((restaurant) {
+      print(restaurant);
+
+      add(LoadSettings(restaurant: restaurant));
+    });
   }
 
   void _onLoadSettings(
@@ -19,8 +33,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     // An Emitter is a class which is capable of emitting new states
   ) async {
     await Future<void>.delayed(Duration(seconds: 1));
-    emit(SettingsLoaded(event.restaurant));
-
+    emit(SettingsLoaded(event.restaurant.copyWith(openingHours: event.restaurant.openingHours ?? [])));
+    print('Loaded restaurant: ${event.restaurant}');
     /* 
        After waiting for a second, emit a SettingsLoaded state 
        with information about the specific restaurant
@@ -53,5 +67,11 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       emit(SettingsLoaded(
           state.restaurant.copyWith(openingHours: OpeningHoursList)));
     }
+  }
+
+    @override 
+  Future<void> close() async{
+    _restaurantSubscription?.cancel();
+    super.close();
   }
 }

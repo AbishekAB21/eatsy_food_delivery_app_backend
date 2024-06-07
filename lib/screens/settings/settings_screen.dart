@@ -62,43 +62,46 @@ class SettingsScreen extends StatelessWidget {
   }
 
   BlocBuilder<SettingsBloc, SettingsState> _buildOpeningHours() {
-    return BlocBuilder<SettingsBloc, SettingsState>(
-      builder: (context, state) {
-        if (state is SettingsLoading) {
-          return Center(
-            child: CircularProgressIndicator(
-              color: apptheme.primaryColor2,
-            ),
-          );
+  return BlocBuilder<SettingsBloc, SettingsState>(
+    builder: (context, state) {
+      if (state is SettingsLoading) {
+        return Center(
+          child: CircularProgressIndicator(
+            color: apptheme.primaryColor2,
+          ),
+        );
+      }
+      if (state is SettingsLoaded) {
+        if (state.restaurant.openingHours == null) {
+          return Text('No opening hours available');
         }
-        if (state is SettingsLoaded) {
-          return ListView.builder(
-            shrinkWrap: true,
-            itemCount: state.restaurant.openingHours!.length,
-            itemBuilder: (context, index) {
-              var openinghours = state.restaurant.openingHours![index];
 
-              return OpeningHoursWidget(
-                openinghours: openinghours,
-                onSliderChange: (value) {
-                  context.read<SettingsBloc>().add(UpdateOpeningHours(
-                      openinghours.copyWith(
-                          openAt: value.start, closeAt: value.end)));
-                },
-                oncheckboxChanged: (value) {
-                  context.read<SettingsBloc>().add(UpdateOpeningHours(
-                      openinghours.copyWith(isOpen: !openinghours.isOpen)));
-                  // Will return the opposite
-                },
-              );
-            },
-          );
-        } else {
-          return Text('Something went wrong');
-        }
-      },
-    );
-  }
+        return ListView.builder(
+          shrinkWrap: true,
+          itemCount: state.restaurant.openingHours!.length,
+          itemBuilder: (context, index) {
+            var openinghours = state.restaurant.openingHours![index];
+            return OpeningHoursWidget(
+              openinghours: openinghours,
+              onSliderChange: (value) {
+                context.read<SettingsBloc>().add(UpdateOpeningHours(
+                    openinghours.copyWith(
+                        openAt: value.start, closeAt: value.end)));
+              },
+              oncheckboxChanged: (value) {
+                context.read<SettingsBloc>().add(UpdateOpeningHours(
+                    openinghours.copyWith(isOpen: !openinghours.isOpen)));
+              },
+            );
+          },
+        );
+      } else {
+        return Text('Something went wrong');
+      }
+    },
+  );
+}
+
 
   Container _buildBasicInformation() {
     return Container(
@@ -132,7 +135,7 @@ class SettingsScreen extends StatelessWidget {
                   maxlines: 1,
                   onChanged: (value) {
                     context.read<SettingsBloc>().add(
-                        UpdateSettings(state.restaurant.copyWith(name: value)));
+                        UpdateSettings(state.restaurant.copyWith(name: value), restaurant:  state.restaurant));
                   },
                 ),
                 CustomTextFormField(
@@ -144,7 +147,7 @@ class SettingsScreen extends StatelessWidget {
                   maxlines: 1,
                   onChanged: (value) {
                     context.read<SettingsBloc>().add(UpdateSettings(
-                        state.restaurant.copyWith(imageUrl: value)));
+                        state.restaurant.copyWith(imageUrl: value), restaurant:  state.restaurant));
                   },
                 ),
                 CustomTextFormField(
@@ -156,7 +159,7 @@ class SettingsScreen extends StatelessWidget {
                   maxlines: 1,
                   onChanged: (value) {
                     context.read<SettingsBloc>().add(UpdateSettings(
-                        state.restaurant.copyWith(tags: value.split(','))));
+                        state.restaurant.copyWith(tags: value.split(',')), restaurant:  state.restaurant));
                   },
                 ),
               ],
@@ -226,7 +229,7 @@ class SettingsScreen extends StatelessWidget {
                   maxlines: 5,
                   onChanged: (value) {
                     context.read<SettingsBloc>().add(UpdateSettings(
-                        state.restaurant.copyWith(description: value)));
+                        state.restaurant.copyWith(description: value), restaurant: state.restaurant));
                   },
                 ),
               ],

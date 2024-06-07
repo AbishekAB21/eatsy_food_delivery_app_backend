@@ -15,7 +15,7 @@ class Restaurant extends Equatable {
   final List<Product>? products;
   final List<OpeningHours>? openingHours;
 
-  Restaurant(this.id, this.name, this.imageUrl, this.description, this.tags,
+  const Restaurant(this.id, this.name, this.imageUrl, this.description, this.tags,
       this.categories, this.products, this.openingHours);
 
   @override
